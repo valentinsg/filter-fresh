@@ -1,141 +1,793 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
+/* =============================================
+   ROOT / GLOBAL
+   ============================================= */
+.wrapper {
   min-height: 100vh;
+  font-family: var(--font-inter), 'Inter', -apple-system, sans-serif;
+  background: #f4f6f9;
+}
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid #e8ecf2;
+  box-shadow: 0 1px 8px rgba(15, 35, 71, 0.06);
+}
+
+.navInner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 28px;
+  height: 66px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
-}
-
-.main {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
-}
-
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
-}
-
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
   gap: 8px;
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.navLogo {
+  flex-shrink: 0;
+  margin-right: 16px;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
+.logoImg {
+  object-fit: contain;
+  border-radius: 4px !important;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  margin-left: auto;
+}
+
+.navLinks a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+  padding: 6px 14px;
+  border-radius: 6px !important;
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.navLinks a:hover {
+  background: #f0f4f8;
+  color: #1a3a6b;
+}
+
+.navActive {
+  background: #2d8653 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  padding: 6px 14px !important;
+}
+
+.navActive:hover {
+  background: #246b42 !important;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: auto;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #1a3a6b;
+  border-radius: 2px !important;
+}
+
+/* =============================================
+   HERO SECTION
+   ============================================= */
+.hero {
+  background: linear-gradient(170deg, #dde4ef 0%, #e8edf5 40%, #edf0f7 100%);
+  padding-top: 50px;
+  overflow: visible;
+  position: relative;
+  min-height: 640px;
+  clip-path: inset(0 0 0 0);
+}
+
+.heroInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: 1fr 780px;
+  align-items: stretch;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+  min-height: 580px;
+}
+
+/* ── Left side ── */
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: center;
+  padding: 48px 0;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 3.4vw, 2.85rem);
+  font-weight: 400;
+  color: #2a6aad;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+  white-space: nowrap;
+}
+
+/* ── Plan card (white box) ── */
+.heroPlanCard {
+  background: white;
+  border-radius: 16px !important;
+  padding: 32px 36px 34px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 12px 40px rgba(15, 41, 82, 0.15), 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid rgba(255,255,255,0.9);
+}
+
+.heroPlanLabel {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f2952;
+  margin-bottom: 10px;
+  letter-spacing: 0;
+}
+
+.heroPriceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.heroCurrency {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f2952;
+  line-height: 1;
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.heroAmount {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #0f2952;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.heroPeriod {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #0f2952;
+  margin-left: 3px;
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+
+.heroPlanNote {
+  font-size: 0.82rem;
+  color: #8a9ab5;
+  margin-bottom: 20px;
+  margin-top: 2px;
+}
+
+.heroBtn {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  background: #2563a8;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 10px !important;
+  letter-spacing: 0.01em;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.heroBtn:hover {
+  background: #1a4f8a;
+  box-shadow: 0 6px 20px rgba(37, 99, 168, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ── Right side: worker photo ── */
+.heroRight {
+  position: relative;
+  align-self: flex-end;
+  height: 720px;
+  width: 680px;
+  flex-shrink: 0;
+  overflow: visible;
+  margin-bottom: -200px;
+}
+
+.workerFrame {
+  position: absolute;
+  bottom: 0;
+  left: -60px;
+  right: -60px;
+  top: -160px;
+}
+
+.workerImg {
+  object-fit: contain !important;
+  object-position: center bottom !important;
+}
+
+/* =============================================
+   PLANS GRID SECTION
+   ============================================= */
+.plans {
+  background: #edf1f7;
+  padding: 64px 28px 56px;
+}
+
+.plansInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.plansTitle {
+  text-align: center;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 400;
+  color: #2a6aad;
+  letter-spacing: -0.01em;
+  margin-bottom: 40px;
+}
+
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+/* =============================================
+   BASE CARD – white, rounded, separated
+   ============================================= */
+.card {
+  background: #ffffff;
+  border-radius: 14px !important;
+  padding: 0;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(26, 58, 107, 0.08);
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(26, 58, 107, 0.15);
+  z-index: 2;
+}
+
+/* inner padding wrapper */
+.cardBody {
+  padding: 28px 26px 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* =============================================
+   CARD 1 – MONTHLY (white, green badge pill)
+   ============================================= */
+.popularBadge {
+  display: inline-flex;
+  align-items: center;
+  background: #2d8653;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 5px 16px;
+  border-radius: 100px !important;
+  margin-bottom: 18px;
+  align-self: flex-start;
+}
+
+/* =============================================
+   CARD 2 – ANNUAL FEATURED
+   White card, teal header strip at top
+   ============================================= */
+.cardFeatured {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 6px 28px rgba(26, 58, 107, 0.12);
+}
+.cardFeatured:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 52px rgba(26, 58, 107, 0.18);
+  z-index: 2;
+}
+
+/* Teal header strip spanning the full top */
+.featuredHeader {
+  background: linear-gradient(135deg, #1c5c40 0%, #267a54 100%);
+  padding: 14px 26px;
+  margin-bottom: 0;
+}
+.featuredLabel {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Italic subtitle under price */
+.cardSubtitle {
+  font-size: 0.84rem;
+  font-style: italic;
+  color: #64748b;
+  margin-bottom: 14px;
+  margin-top: 1px;
+}
+
+/* Savings highlight box */
+.cardSavings {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1a3a6b;
+  background: #e8f4fd;
+  border: 1px solid #b8d8f0;
+  border-radius: 8px !important;
+  padding: 11px 14px;
+  margin-bottom: 18px;
+  line-height: 1.4;
+}
+.cardSavings svg { flex-shrink: 0; margin-top: 3px; fill: #2563a8; }
+
+/* Featured card text colors (dark text on white) */
+.cardFeatured .cardCurrency,
+.cardFeatured .cardAmount { color: #1a2332; }
+.cardFeatured .cardPeriod { color: #64748b; }
+.cardFeatured .checkItem { color: #374151; }
+
+/* =============================================
+   CARD 3 – ELITE AIR CARE
+   White card, crown + title as header
+   ============================================= */
+.cardElite {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 4px 20px rgba(26, 58, 107, 0.08);
+}
+.cardElite:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(26, 58, 107, 0.15);
+  z-index: 2;
+}
+
+.eliteHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.crownEmoji {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.eliteLabel {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1a2332;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* Elite text colors (dark text on white) */
+.cardElite .cardCurrency,
+.cardElite .cardAmount { color: #1a2332; }
+.cardElite .cardPeriod { color: #64748b; }
+.cardElite .checkItem { color: #374151; }
+
+/* =============================================
+   CARD CONTENT (shared)
+   ============================================= */
+.cardPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 1px;
+  margin-bottom: 4px;
+}
+
+.cardCurrency {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1a2332;
+  line-height: 1;
+  align-self: flex-start;
+  margin-top: 6px;
+}
+
+.cardAmount {
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: #1a2332;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.cardPeriod {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-left: 3px;
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+
+.cardNote {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  margin-bottom: 20px;
+  margin-top: 2px;
+}
+
+/* =============================================
+   FEATURE LIST
+   ============================================= */
+.cardFeatures {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.checkItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.highlightText {
+  color: #2d8653;
+  font-weight: 700;
+}
+
+/* =============================================
+   BUTTONS
+   ============================================= */
+.cardBtn {
+  display: block;
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 8px !important;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+/* Card 1 – medium blue */
+.cardBtnBlue {
+  background: #2563a8;
+  color: white;
+}
+.cardBtnBlue:hover {
+  background: #1a4f8a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 168, 0.4);
+}
+
+/* Card 2 – dark navy blue */
+.cardBtnDarkBlue {
+  background: #1a3a6b;
+  color: white;
+  font-weight: 800;
+}
+.cardBtnDarkBlue:hover {
+  background: #0f2347;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26, 58, 107, 0.45);
+}
+
+/* Card 3 – solid navy */
+.cardBtnNavy {
+  background: #2563a8;
+  color: white;
+  font-weight: 700;
+}
+.cardBtnNavy:hover {
+  background: #1a4f8a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26, 58, 107, 0.4);
+}
+
+.freeSetup {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-top: 12px;
+  letter-spacing: 0.01em;
+}
+
+/* ── Disclaimer ── */
+.disclaimer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  max-width: 640px;
+  margin: 32px auto 0;
+  line-height: 1.65;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.footer {
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  padding: 24px;
+  text-align: center;
+}
+
+.footerLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.footerLink {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1a3a6b;
+  transition: color 0.15s ease;
+}
+
+.footerLink:hover {
+  color: #0f2347;
+  text-decoration: underline;
+}
+
+.sep {
+  color: #cbd5e0;
+  font-size: 1.1rem;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+
+/* ── Tablet landscape (≤1100px) ── */
+@media (max-width: 1100px) {
+  .heroInner {
+    grid-template-columns: 1fr 480px;
+    padding: 0 28px;
   }
 
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
+  .heroRight {
+    height: 500px;
+    width: 480px;
+    margin-bottom: -80px;
+  }
+
+  .workerFrame {
+    left: -20px;
+    right: -20px;
+    top: -120px;
+  }
+
+  .plansGrid {
+    gap: 20px;
   }
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
+/* ── Tablet portrait (≤900px): stack hero, cards stay in grid ── */
+@media (max-width: 900px) {
+  .hero {
+    min-height: unset;
+    padding-bottom: 0;
   }
 
-  .intro {
+  .heroInner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    padding: 40px 28px 0;
+    min-height: unset;
+    justify-items: center;
+  }
+
+  .heroLeft {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 24px;
+  }
+
+  .heroTitle {
+    white-space: normal;
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+  }
+
+  .heroPlanCard {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  .heroRight {
+    display: flex;
+    position: relative;
+    height: 340px;
+    width: 100%;
+    max-width: 420px;
+    margin-bottom: -60px;
+    overflow: visible;
+  }
+
+  .workerFrame {
+    position: absolute;
+    inset: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  /* Cards: 3 columns still on tablet portrait, but smaller gap */
+  .plansGrid {
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
   }
 
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
+  .cardBody {
+    padding: 22px 20px 26px;
+  }
+
+  .cardAmount {
+    font-size: 2.6rem;
+  }
+
+  .cardCurrency {
+    font-size: 1.2rem;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
+/* ── Smaller tablets / large phones (≤768px) ── */
+@media (max-width: 768px) {
+  .navLinks {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .navInner {
+    padding: 0 16px;
   }
 
-  .page {
-    --background: #000;
-    --foreground: #000;
+  /* Switch to 1 column for cards */
+  .plansGrid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto;
+    gap: 20px;
+  }
 
-    --text-primary: #ededed;
-    --text-secondary: #999;
+  .cardBody {
+    padding: 26px 24px 28px;
+  }
 
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
+  .cardAmount {
+    font-size: 3rem;
+  }
+
+  .cardCurrency {
+    font-size: 1.3rem;
+  }
+}
+
+/* ── Small mobile (≤480px) ── */
+@media (max-width: 480px) {
+  .hero {
+    min-height: unset;
+  }
+
+  .heroInner {
+    padding: 32px 20px 0;
+  }
+
+  .heroTitle {
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+  }
+
+  .heroPlanCard {
+    padding: 24px 20px;
+    max-width: 100%;
+  }
+
+  .heroAmount {
+    font-size: 3.2rem;
+  }
+
+  .heroRight {
+    height: 260px;
+    max-width: 320px;
+    margin-bottom: -40px;
+  }
+
+  .plans {
+    padding: 56px 16px 36px;
+  }
+
+  .plansTitle {
+    font-size: 1.5rem;
+    margin-bottom: 28px;
+  }
+
+  .plansGrid {
+    max-width: 100%;
+    gap: 18px;
+  }
+
+  .cardBody {
+    padding: 22px 20px 26px;
+  }
+
+  .cardAmount {
+    font-size: 2.6rem;
+  }
+
+  .cardCurrency {
+    font-size: 1.2rem;
+  }
+
+  .footer {
+    padding: 20px 16px;
+  }
+
+  .footerLinks {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sep {
+    display: none;
   }
 }
