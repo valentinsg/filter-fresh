@@ -34,10 +34,15 @@
 .navLogo {
   flex-shrink: 0;
   margin-right: 16px;
+  width: 150px;
+  height: 48px;
+  position: relative;
 }
 
 .logoImg {
   object-fit: contain;
+  width: 100% !important;
+  height: 100% !important;
   border-radius: 4px !important;
 }
 
@@ -94,153 +99,7 @@
   border-radius: 2px !important;
 }
 
-/* =============================================
-   HERO SECTION
-   ============================================= */
-.hero {
-  background: linear-gradient(170deg, #dde4ef 0%, #e8edf5 40%, #edf0f7 100%);
-  padding-top: 50px;
-  overflow: visible;
-  position: relative;
-  min-height: 640px;
-  clip-path: inset(0 0 0 0);
-}
-
-.heroInner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 48px;
-  display: grid;
-  grid-template-columns: 1fr 780px;
-  align-items: stretch;
-  gap: 0;
-  position: relative;
-  z-index: 1;
-  min-height: 580px;
-}
-
-/* ── Left side ── */
-.heroLeft {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  align-self: center;
-  padding: 48px 0;
-}
-
-.heroTitle {
-  font-size: clamp(2rem, 3.4vw, 2.85rem);
-  font-weight: 400;
-  color: #2a6aad;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  margin-bottom: 28px;
-  white-space: nowrap;
-}
-
-/* ── Plan card (white box) ── */
-.heroPlanCard {
-  background: white;
-  border-radius: 16px !important;
-  padding: 32px 36px 34px;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: 0 12px 40px rgba(15, 41, 82, 0.15), 0 2px 8px rgba(0,0,0,0.06);
-  border: 1px solid rgba(255,255,255,0.9);
-}
-
-.heroPlanLabel {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #0f2952;
-  margin-bottom: 10px;
-  letter-spacing: 0;
-}
-
-.heroPriceRow {
-  display: flex;
-  align-items: baseline;
-  gap: 0;
-  margin-bottom: 4px;
-  line-height: 1;
-}
-
-.heroCurrency {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #0f2952;
-  line-height: 1;
-  align-self: flex-start;
-  margin-top: 8px;
-}
-
-.heroAmount {
-  font-size: 4rem;
-  font-weight: 800;
-  color: #0f2952;
-  line-height: 1;
-  letter-spacing: -0.04em;
-}
-
-.heroPeriod {
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: #0f2952;
-  margin-left: 3px;
-  align-self: flex-end;
-  margin-bottom: 4px;
-}
-
-.heroPlanNote {
-  font-size: 0.82rem;
-  color: #8a9ab5;
-  margin-bottom: 20px;
-  margin-top: 2px;
-}
-
-.heroBtn {
-  display: block;
-  width: 100%;
-  padding: 14px 20px;
-  background: #2563a8;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: center;
-  border-radius: 10px !important;
-  letter-spacing: 0.01em;
-  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
-}
-
-.heroBtn:hover {
-  background: #1a4f8a;
-  box-shadow: 0 6px 20px rgba(37, 99, 168, 0.4);
-  transform: translateY(-1px);
-}
-
-/* ── Right side: worker photo ── */
-.heroRight {
-  position: relative;
-  align-self: flex-end;
-  height: 720px;
-  width: 680px;
-  flex-shrink: 0;
-  overflow: visible;
-  margin-bottom: -200px;
-}
-
-.workerFrame {
-  position: absolute;
-  bottom: 0;
-  left: -60px;
-  right: -60px;
-  top: -160px;
-}
-
-.workerImg {
-  object-fit: contain !important;
-  object-position: center bottom !important;
-}
+/* Hero section styles removed (migrated to Tailwind) */
 
 /* =============================================
    PLANS GRID SECTION
