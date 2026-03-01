@@ -102,10 +102,91 @@ export default function Home() {
         )}
       </nav>
 
+      <section
+        className="w-full pt-24 pb-12 md:pt-28 md:pb-16 bg-gradient-to-b from-white via-white to-gray-50"
+        id="pricing"
+      >
+        <div className="max-w-7xl mx-auto px-5 md:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
+            <div className="md:col-span-7">
+              <p className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-wide text-[#2d8653] bg-[#2d8653]/10 px-3 py-1 rounded-full">
+                Indoor Air Quality
+              </p>
+              <h1 className="mt-4 text-3xl md:text-5xl font-semibold text-[#1e3a8a] leading-tight">
+                Your Home’s Air May Be 2–5x More Polluted Than Outside
+              </h1>
+              <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
+                Americans spend 90% of their time indoors. When your HVAC filter is dirty, it doesn’t just stop working. It recirculates dust, pet dander, pollen, mold spores, and fine particles into the air your family breathes every single day.
+              </p>
+              <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
+                If you have pets, allergies, asthma, or children, your filter is not optional maintenance. It is your home’s first line of defense.
+              </p>
+
+              <div className="mt-7 md:mt-8">
+                <a
+                  href="#plans"
+                  className="inline-flex items-center justify-center w-full md:w-auto bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white px-7 py-3.5 rounded-md shadow-md transition-all font-semibold"
+                  id="btn-hero-protect"
+                >
+                  Protect My Air Now
+                </a>
+                <p className="mt-3 text-sm text-gray-600">
+                  Professional filter replacement. On schedule. Clean the air you breathe.
+                </p>
+
+                <a
+                  href="#pricing-options"
+                  className="mt-3 inline-block text-sm font-medium text-[#1e4a7e] hover:text-[#153a63]"
+                  id="link-hero-see-options"
+                >
+                  See plan options
+                </a>
+              </div>
+            </div>
+
+            <div className="md:col-span-5">
+              <div className="bg-white/90 backdrop-blur border border-gray-200 rounded-2xl p-5 md:p-7 shadow-[0_8px_30px_rgba(17,24,39,0.08)]">
+                <p className="text-sm font-semibold text-[#1e3a8a] tracking-wide uppercase">
+                  Impact
+                </p>
+                <p className="mt-2 text-gray-900 font-semibold text-lg">A clogged air filter can:</p>
+                <ul className="mt-4 space-y-2.5 text-gray-700">
+                  <li className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#2d8653] flex-shrink-0" />
+                    <span>Circulate airborne allergens throughout your home</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#2d8653] flex-shrink-0" />
+                    <span>Trigger or worsen allergy and asthma symptoms</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#2d8653] flex-shrink-0" />
+                    <span>Restrict airflow and strain your HVAC system</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#2d8653] flex-shrink-0" />
+                    <span>Increase indoor particulate levels</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#2d8653] flex-shrink-0" />
+                    <span>Lower overall indoor air quality</span>
+                  </li>
+                </ul>
+
+                <div className="mt-6 border-t border-gray-200 pt-4">
+                  <p className="text-gray-800 font-semibold">Most homeowners forget to change their filter.</p>
+                  <p className="text-gray-800 font-semibold">Most families are breathing the consequences.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── HERO ── */}
       <section
         className="bg-gray-50 border-b-[1px] border-gray-400 w-full pt-24 pb-0 md:py-20"
-        id="pricing"
+        id="pricing-options"
       >
         <div className="max-w-full mx-auto px-5 md:px-12 flex flex-row md:flex-row items-center md:items-start relative">
           {/* Left: text + card */}
