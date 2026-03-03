@@ -1,202 +1,309 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import styles from "./page.module.css";
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <div className={styles.wrapper}>
-      {/* ── NAVBAR ── */}
-      <nav className={styles.navbar}>
-        <div className={styles.navInner}>
-          <div className={styles.navLogo}>
+    <div className="min-h-screen font-sans bg-white">
+      {/* ── NAVBAR – transparent on hero, white on scroll ── */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white border-b border-gray-200 shadow-[0_1px_8px_rgba(15,35,71,0.07)]"
+            : "bg-transparent border-transparent shadow-none"
+        }`}
+      >
+        <div className="max-w-[1180px] mx-auto px-7 h-[66px] flex items-center gap-2">
+          {/* Logo */}
+          <div className="flex-shrink-0 mr-4 relative w-[150px] h-[48px]">
             <Image
-              src="/logo.jpeg"
+              src="/logo-without-bg.png"
               alt="FilterFresh Logo"
-              width={150}
-              height={48}
-              className={styles.logoImg}
+              fill
+              className="object-contain"
               priority
             />
           </div>
-          <ul className={styles.navLinks}>
+
+          {/* Desktop nav links */}
+          <ul className="hidden md:flex items-center gap-1 list-none ml-auto">
+            {[
+              { href: "#about", label: "About", id: "nav-about" },
+              { href: "#how-it-works", label: "How It Works", id: "nav-how" },
+              {
+                href: "#service-area",
+                label: "Service Area",
+                id: "nav-service",
+              },
+              { href: "#contact", label: "Contact", id: "nav-contact" },
+            ].map((link) => (
+              <li key={link.id}>
+                <a
+                  href={link.href}
+                  id={link.id}
+                  className={`text-sm font-semibold px-3.5 py-1.5 rounded-md transition-all duration-300 ${
+                    scrolled
+                      ? "text-gray-600 hover:bg-gray-100 hover:text-[#1e3a8a]"
+                      : "text-white/90 hover:bg-white/20 hover:text-white"
+                  }`}
+                  style={
+                    scrolled ? {} : { textShadow: "0 1px 4px rgba(0,0,0,0.35)" }
+                  }
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
             <li>
-              <a href="#about" id="nav-about">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#how-it-works" id="nav-how">
-                How It Works
-              </a>
-            </li>
-            <li>
-              <a href="#pricing" className={styles.navActive} id="nav-pricing">
+              <a
+                href="#pricing"
+                id="nav-pricing"
+                className="text-sm font-bold bg-[#2d8653] text-white px-3.5 py-1.5 rounded-md hover:bg-[#246b42] transition-all ml-1"
+              >
                 Pricing
               </a>
             </li>
-            <li>
-              <a href="#service-area" id="nav-service">
-                Service Area
-              </a>
-            </li>
-            <li>
-              <a href="#contact" id="nav-contact">
-                Contact
-              </a>
-            </li>
           </ul>
+
+          {/* Mobile hamburger – white on hero, navy when scrolled */}
           <button
-            className={styles.hamburger}
+            className="md:hidden flex flex-col gap-[5px] bg-transparent border-none cursor-pointer p-1.5 ml-auto"
             aria-label="Open menu"
             id="hamburger-btn"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            <span />
-            <span />
-            <span />
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className={`block w-[22px] h-[2px] rounded-sm transition-colors duration-300 ${
+                  scrolled ? "bg-[#1e3a8a]" : "bg-white shadow-sm"
+                }`}
+              />
+            ))}
           </button>
         </div>
 
-        {/* Mobile Menu Dropdown */}
+        {/* Mobile dropdown */}
         {isMobileMenuOpen && (
-          <div className="absolute top-[66px] left-0 w-full bg-white shadow-lg border-t border-gray-100 py-4 px-6 flex flex-col gap-4 md:hidden z-50">
-            <a
-              href="#about"
-              className="text-gray-600 font-medium hover:text-[#1e3a8a] text-lg py-2 border-b border-gray-50"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              About
-            </a>
-            <a
-              href="#how-it-works"
-              className="text-gray-600 font-medium hover:text-[#1e3a8a] text-lg py-2 border-b border-gray-50"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              How It Works
-            </a>
+          <div className="md:hidden absolute top-[66px] left-0 w-full bg-white/95 backdrop-blur-sm shadow-lg border-t border-gray-100 py-4 px-6 flex flex-col gap-1 z-50">
+            {[
+              { href: "#about", label: "About" },
+              { href: "#how-it-works", label: "How It Works" },
+              { href: "#service-area", label: "Service Area" },
+              { href: "#contact", label: "Contact" },
+            ].map(({ href, label }) => (
+              <a
+                key={href}
+                href={href}
+                className="text-gray-700 font-medium hover:text-[#1e3a8a] text-base py-2 border-b border-gray-100"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {label}
+              </a>
+            ))}
             <a
               href="#pricing"
-              className="text-[#2d8653] font-bold hover:text-[#246b42] text-lg py-2 border-b border-gray-50"
+              className="text-[#2d8653] font-bold hover:text-[#246b42] text-base py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Pricing
-            </a>
-            <a
-              href="#service-area"
-              className="text-gray-600 font-medium hover:text-[#1e3a8a] text-lg py-2 border-b border-gray-50"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Service Area
-            </a>
-            <a
-              href="#contact"
-              className="text-gray-600 font-medium hover:text-[#1e3a8a] text-lg py-2"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Contact
             </a>
           </div>
         )}
       </nav>
 
+      {/* ── HERO SECTION – fullscreen image, transparent navbar bleeds into it ── */}
       <section
-        className="w-full pt-24 pb-12 md:pt-28 md:pb-16 bg-gradient-to-b from-white via-white to-gray-50"
+        className="relative w-full overflow-hidden"
+        style={{ height: "70svh", minHeight: 500, maxHeight: 750 }}
+      >
+        {/* Background image – full coverage */}
+        <Image
+          src="/worker-filter-fresh.jpeg"
+          alt="FilterFresh technician holding air filter"
+          fill
+          className="object-cover object-[10%_top] ml-20"
+          priority
+          sizes="100vw"
+        />
+
+        {/* Left–to–right gradient: solid white on far left → fades → transparent */}
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            background:
+              "linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.95) 22%, rgba(255,255,255,0.7) 38%, rgba(255,255,255,0.15) 58%, transparent 75%)",
+          }}
+        />
+
+        {/* Bottom fade to white */}
+        <div
+          className="absolute bottom-0 left-0 right-0 z-10"
+          style={{
+            height: "32%",
+            background:
+              "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.65) 55%, #ffffff 100%)",
+          }}
+        />
+
+        {/* Hero text + CTA inside hero */}
+        <div className="relative z-20 h-full flex items-center px-6 md:px-12 lg:px-20">
+          <div className="max-w-[420px] md:max-w-[480px]">
+            <h1
+              className="font-medium text-[#1e3a8a] leading-[1.08] "
+              style={{ fontSize: "clamp(2rem, 5.5vw, 3.6rem)" }}
+            >
+              Your Home&apos;s Air
+              <br />
+              May Be 2–5x
+              <br />
+              More Polluted
+              <br />
+              Than Outside
+            </h1>
+
+            {/* CTA below headline */}
+            <div className="mt-6 flex flex-col sm:flex-row items-start gap-3">
+              <a
+                href="#plans"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white px-6 py-3 rounded-md shadow-md transition-all font-semibold text-sm whitespace-nowrap"
+                id="btn-hero-protect"
+              >
+                Protect My Air Now
+              </a>{" "}
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* ── IAQ CONTENT SECTION ── */}
+      <section
+        className="w-full pt-16 pb-20 md:pt-20 md:pb-24 bg-white"
         id="pricing"
       >
         <div className="max-w-7xl mx-auto px-5 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
+            {/* Left: copy */}
             <div className="md:col-span-7">
               <p className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-wide text-[#2d8653] bg-[#2d8653]/10 px-3 py-1 rounded-full">
                 Indoor Air Quality
               </p>
-              <h1 className="mt-4 text-3xl md:text-5xl font-semibold text-[#1e3a8a] leading-tight">
-                Your Home’s Air May Be 2–5x More Polluted Than Outside
-              </h1>
+              <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1e3a8a] leading-tight">
+                Your Home&apos;s Air May Be 2–5x More Polluted Than Outside
+              </h2>
               <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
-                Americans spend 90% of their time indoors. When your HVAC filter is dirty, it doesn’t just stop working. It recirculates dust, pet dander, pollen, mold spores, and fine particles into the air your family breathes every single day.
+                Americans spend 90% of their time indoors. When your HVAC filter
+                is dirty, it doesn&apos;t just stop working. It recirculates
+                dust, pet dander, pollen, mold spores, and fine particles into
+                the air your family breathes every single day.
               </p>
               <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
-                If you have pets, allergies, asthma, or children, your filter is not optional maintenance. It is your home’s first line of defense.
+                If you have pets, allergies, asthma, or children, your filter is
+                not optional maintenance. It is your home&apos;s first line of
+                defense.
               </p>
 
-              <div className="mt-7 md:mt-8">
+              <div className="mt-8 md:mt-10">
                 <a
                   href="#plans"
                   className="inline-flex items-center justify-center w-full md:w-auto bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white px-7 py-3.5 rounded-md shadow-md transition-all font-semibold"
                   id="btn-hero-protect"
                 >
-                  Protect My Air Now
-                </a>
-                <p className="mt-3 text-sm text-gray-600">
-                  Professional filter replacement. On schedule. Clean the air you breathe.
-                </p>
-
-                <a
-                  href="#pricing-options"
-                  className="mt-3 inline-block text-sm font-medium text-[#1e4a7e] hover:text-[#153a63]"
-                  id="link-hero-see-options"
-                >
                   See plan options
                 </a>
+                <p className="mt-3 text-sm text-gray-500">
+                  Professional filter replacement. On schedule. Clean the air
+                  you breathe.
+                </p>
               </div>
             </div>
 
+            {/* Right: Impact card */}
             <div className="md:col-span-5">
-              <div className="bg-white/90 backdrop-blur border border-gray-200 rounded-2xl p-5 md:p-7 shadow-[0_8px_30px_rgba(17,24,39,0.08)]">
-                <p className="text-sm font-semibold text-[#1e3a8a] tracking-wide uppercase">
-                  Impact
-                </p>
-                <p className="mt-2 text-gray-900 font-semibold text-lg">A clogged air filter can:</p>
-                <ul className="mt-4 space-y-2.5 text-gray-700">
-                  <li className="flex gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#2d8653] flex-shrink-0" />
-                    <span>Circulate airborne allergens throughout your home</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#2d8653] flex-shrink-0" />
-                    <span>Trigger or worsen allergy and asthma symptoms</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#2d8653] flex-shrink-0" />
-                    <span>Restrict airflow and strain your HVAC system</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#2d8653] flex-shrink-0" />
-                    <span>Increase indoor particulate levels</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#2d8653] flex-shrink-0" />
-                    <span>Lower overall indoor air quality</span>
-                  </li>
-                </ul>
-
-                <div className="mt-6 border-t border-gray-200 pt-4">
-                  <p className="text-gray-800 font-semibold">Most homeowners forget to change their filter.</p>
-                  <p className="text-gray-800 font-semibold">Most families are breathing the consequences.</p>
+              <div className="relative bg-white border-transparent rounded-2xl overflow-hidden shadow-[0_8px_32px_rgba(17,24,39,0.08)]">
+                {/* Top faded image */}
+                <div className="relative w-full h-[200px] overflow-hidden">
+                  <Image
+                    src="/people-adquiring-filter-fresh.jpeg"
+                    alt="People acquiring FilterFresh service"
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                  />
+                  {/* Fade to white at bottom – starts at 50% so no line is visible */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to bottom, transparent 40%, rgba(255,255,255,0.6) 70%, #ffffff 100%)",
+                    }}
+                  />
                 </div>
+
+                <div className="px-6 pb-6 pt-6">
+                  {/* Header – plain label, no icon */}
+                  <p className="text-sm font-bold text-[#1e3a8a] tracking-widest uppercase mt-1">
+                    Impact
+                  </p>
+
+                  <p className="mt-3 text-gray-900 font-semibold text-base leading-snug">
+                    A clogged air filter can:
+                  </p>
+
+                  <ul className="mt-3 space-y-2.5">
+                    {[
+                      "Circulate airborne allergens throughout your home",
+                      "Trigger or worsen allergy and asthma symptoms",
+                      "Restrict airflow and strain your HVAC system",
+                      "Increase indoor particulate levels",
+                      "Lower overall indoor air quality",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-[#2d8653] flex-shrink-0" />
+                        <span className="text-sm text-gray-700 leading-relaxed">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-5 pt-4 border-t border-gray-100">
+                    <p className="text-gray-800 font-semibold text-sm">
+                      Most homeowners forget to change their filter.
+                    </p>
+                    <p className="text-gray-800 font-semibold text-sm mt-1">
+                      Most families are breathing the consequences.
+                    </p>
+                  </div>
+                </div>
+                {/* end px-6 pb-6 */}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── HERO ── */}
+      {/* ── PRICING PREVIEW SECTION ── */}
       <section
-        className="bg-gray-50 border-b-[1px] border-gray-400 w-full pt-24 pb-0 md:py-20"
+        className="bg-gray-50 border-b border-gray-200 w-full pt-12 md:py-16"
         id="pricing-options"
       >
-        <div className="max-w-full mx-auto px-5 md:px-12 flex flex-row md:flex-row items-center md:items-start relative">
-          {/* Left: text + card */}
-          <div className="w-full text-left md:w-1/2 z-10 flex flex-col items-center md:items-start md:text-left">
-            <h1 className="text-xl md:text-5xl font-semibold text-primary mb-2 md:mb-10 w-full md:whitespace-nowrap absolute top-0 left-0 z-10 ml-4">
+        <div className="max-w-full mx-auto px-5 md:px-12 flex flex-row items-center relative">
+          {/* Left: card */}
+          <div className="w-full text-left md:w-1/2 z-10 flex flex-col items-center md:items-start">
+            <h2 className="text-xl md:text-4xl font-semibold text-[#1e3a8a] mb-6 w-full">
               Choose Your Air Care Plan
-            </h1>
-
+            </h2>
             <div
-              className="bg-white border-[1px] border-gray-400 text-left mt-2 rounded-md shadow-lg p-6 w-full max-w-3xl flex flex-col relative z-20"
+              className="bg-white border border-gray-300 text-left rounded-lg shadow-lg p-6 w-full max-w-sm flex flex-col relative z-20"
               style={{
                 maskImage:
                   "linear-gradient(to right, black 80%, transparent 100%)",
@@ -204,20 +311,20 @@ export default function Home() {
                   "linear-gradient(to right, black 80%, transparent 100%)",
               }}
             >
-              <p className="text-md font-semibold text-primary">
+              <p className="text-base font-semibold text-[#1e3a8a]">
                 Standard Monthly
               </p>
-              <div className="flex items-baseline">
-                <span className="text-xl font-semibold text-primary">$</span>
-                <span className="text-2xl font-semibold text-primary mx-1">
+              <div className="flex items-baseline mt-1">
+                <span className="text-xl font-bold text-[#1e3a8a]">$</span>
+                <span className="text-3xl font-bold text-[#1e3a8a] mx-1">
                   49
                 </span>
                 <span className="text-sm text-gray-500">/month</span>
               </div>
-              <p className="text-sm text-gray-500 mb-2">+ $99 setup fee *</p>
+              <p className="text-sm text-gray-500 mb-3">+ $99 setup fee *</p>
               <a
                 href="#monthly"
-                className="inline-block w-auto bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white py-2 text-center rounded-md shadow-md transition-all"
+                className="inline-block w-full bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white py-2.5 text-center rounded-md shadow-md transition-all font-semibold text-sm"
                 id="btn-hero-monthly"
               >
                 Choose Monthly
@@ -226,13 +333,8 @@ export default function Home() {
           </div>
 
           {/* Right: worker photo */}
-          {/* On mobile, we position him behind or below?
-              The image shows him clearly on the right.
-              For mobile, let's put him at the bottom, overlapping maybe, or just stacked.
-              To match "like this" (desktop image) on mobile, stacking is best.
-          */}
-          <div className="w-full md:w-1/2 md:mt-20 md:flex items-end justify-end md:justify-end -mr-12 md:-mr-12">
-            <div className="relative w-26 h-64 md:w-[450px] md:h-[550px] ">
+          <div className="w-full md:w-1/2 md:mt-20 flex items-end justify-end -mr-10 md:-mr-12">
+            <div className="relative w-52 h-72 md:w-[450px] md:h-[550px]">
               <Image
                 src="/worker-bg-out.png"
                 alt="FilterFresh technician"
@@ -247,24 +349,23 @@ export default function Home() {
       </section>
 
       {/* ── PLANS SECTION ── */}
-      {/* ── PLANS SECTION ── */}
       <section
         className="py-16 relative"
         id="plans"
         style={{
           backgroundImage:
-            "linear-gradient(to bottom, #f9fafb 10%, rgba(249, 250, 251, 0.8) 40%, rgba(249, 250, 251, 0.4) 100%), url('/bg-kitchen.png')",
+            "linear-gradient(to bottom, #f9fafb 10%, rgba(249,250,251,0.8) 40%, rgba(249,250,251,0.4) 100%), url('/bg-kitchen.png')",
           backgroundPosition: "top, bottom center",
           backgroundSize: "cover, cover",
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="max-w-7xl mx-auto px-12">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-center text-2xl font-semibold text-[#1e3a8a] mb-12">
             Choose Your Air Care Plan
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-            {/* ── Card 1: Monthly ── */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 items-start">
+            {/* Card 1: Monthly */}
             <div
               className="bg-white rounded-xl shadow-lg border border-gray-100 p-8 flex flex-col items-center relative"
               id="card-monthly"
@@ -275,10 +376,10 @@ export default function Home() {
               <div className="flex items-center justify-center text-[#1e3a8a] mb-1 mt-4">
                 <span className="text-3xl font-bold align-top mt-2">$</span>
                 <span className="text-5xl font-semibold">49</span>
-                <span className="text-3xl text-gray-500 ml-1">/month</span>
+                <span className="text-2xl text-gray-500 ml-1">/month</span>
               </div>
-              <p className="text-md text-gray-500 mb-6">+ $99 setup fee *</p>
-              <div className="bg-gradient-to-r from-transparent via-gray-300 to-transparent h-[1px] w-full mb-6"></div>
+              <p className="text-sm text-gray-500 mb-6">+ $99 setup fee *</p>
+              <div className="bg-gradient-to-r from-transparent via-gray-300 to-transparent h-px w-full mb-6" />
               <ul className="w-full space-y-3 mb-8">
                 <CheckItem text="Quarterly Visits (4/yr)" />
                 <CheckItem text="First 2 Filters Included" />
@@ -287,30 +388,28 @@ export default function Home() {
               </ul>
               <a
                 href="#monthly"
-                className="w-full bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white py-2 text-center rounded-md shadow-md transition-all"
+                className="w-full bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white py-2.5 text-center rounded-md shadow-md transition-all font-semibold text-sm"
                 id="btn-monthly-card"
               >
                 Choose Monthly
               </a>
             </div>
 
-            {/* ── Card 2: Annual Featured ── */}
-            {/* ── Card 2: Annual Featured ── */}
+            {/* Card 2: Annual */}
             <div
-              className="bg-white rounded-xl shadow-2xl border border-gray-100 transform md:-translate-y-4 relative z-10 flex flex-col items-center"
+              className="bg-white rounded-xl shadow-2xl border border-gray-100 md:-translate-y-4 relative z-10 flex flex-col items-center"
               id="card-annual"
             >
-              {/* Green Header Section with Image/Gradient */}
               <div
-                className="w-full rounded-t-lg relative flex flex-col items-center justify-center text-white py-6"
+                className="w-full rounded-t-xl relative flex flex-col items-center justify-center text-white py-6"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(56, 102, 75, 0.85) 0%, rgba(108, 163, 116, 0.65) 100%), url('/bg-kitchen.png')",
+                    "linear-gradient(135deg, rgba(56,102,75,0.85) 0%, rgba(108,163,116,0.65) 100%), url('/bg-kitchen.png')",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
               >
-                <div className="absolute -top-3 bg-[#4a7a60] text-white text-xs px-4 py-1 rounded-sm uppercase tracking-wide border border-[#5d8e62] shadow-sm">
+                <div className="absolute -top-3 bg-[#4a7a60] text-white text-[10px] px-4 py-1 rounded-sm uppercase tracking-widest border border-[#5d8e62] shadow-sm">
                   Standard Annual
                 </div>
                 <div className="flex items-center justify-center mb-0 mt-2">
@@ -322,15 +421,13 @@ export default function Home() {
                     /year
                   </span>
                 </div>
-                <p className="text-sm font-light opacity-80 uppercase tracking-widest text-[10px] mt-1">
+                <p className="text-[10px] font-light opacity-80 uppercase tracking-widest mt-1">
                   (Quarterly Visits)
                 </p>
               </div>
-
               <div className="p-8 w-full flex flex-col items-center">
-                {/* Savings Text */}
                 <div className="text-center mb-6">
-                  <p className="text-[#3a6948] font-bold text-xl tracking-wide -mt-4">
+                  <p className="text-[#3a6948] font-bold text-xl tracking-wide -mt-2">
                     Save over <span className="text-[#2d5c3b]">$200</span>
                     <br />
                     <span className="text-sm font-normal text-gray-500">
@@ -338,19 +435,17 @@ export default function Home() {
                     </span>
                   </p>
                 </div>
-
                 <ul className="w-full space-y-3 mb-6">
                   <CheckItem text="Quarterly Visits (4/yr)" />
                   <CheckItem text="First 4 Filters Included FREE" highlight />
                   <CheckItem text="Air Report Each Visit" />
                 </ul>
-
                 <a
                   href="#annual"
-                  className="w-full bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white py-2 text-center rounded-md shadow-md transition-all mb-4"
+                  className="w-full bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white py-2.5 text-center rounded-md shadow-md transition-all font-semibold text-sm mb-3"
                   id="btn-annual-card"
                 >
-                  Choose Annual &gt;
+                  Choose Annual →
                 </a>
                 <p className="text-center text-xs text-gray-400 font-medium">
                   $99 Setup Fee Waived
@@ -358,7 +453,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* ── Card 3: Elite ── */}
+            {/* Card 3: Elite */}
             <div
               className="bg-white rounded-xl shadow-lg border border-gray-100 p-8 flex flex-col items-center relative"
               id="card-elite"
@@ -369,24 +464,21 @@ export default function Home() {
                   Elite Air Care
                 </span>
               </div>
-
               <div className="flex items-center justify-center text-[#1e3a8a] mb-1 mt-4">
                 <span className="text-3xl font-bold align-top mt-2">$</span>
                 <span className="text-5xl font-semibold">899</span>
-                <span className="text-3xl text-gray-500 ml-1">/year</span>
+                <span className="text-2xl text-gray-500 ml-1">/year</span>
               </div>
-              <div className="bg-gradient-to-r from-transparent via-gray-300 to-transparent h-[1px] w-full mb-6 mt-6"></div>
-
-              <ul className="w-full space-y-4 mb-8 pl-2">
+              <div className="bg-gradient-to-r from-transparent via-gray-300 to-transparent h-px w-full mb-6 mt-6" />
+              <ul className="w-full space-y-4 mb-8">
                 <CheckItem text="Monthly Visits (12/yr)" />
                 <CheckItem text="First 4 Filters Included" />
                 <CheckItem text="Sunday Access & Priority Scheduling" />
                 <CheckItem text="Advanced System Inspection" />
               </ul>
-
               <a
                 href="#elite"
-                className="w-full bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white py-2 text-center rounded-md shadow-md transition-all"
+                className="w-full bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white py-2.5 text-center rounded-md shadow-md transition-all font-semibold text-sm"
                 id="btn-elite-card"
               >
                 Choose Premium
@@ -396,8 +488,7 @@ export default function Home() {
 
           <p className="text-center text-sm text-gray-400 max-w-full mt-12">
             All plans include free setup + first 4 MERV-rated filters only with
-            annual subscriptions. Additional filters billed as needed (#
-            &gt;2/visit).
+            annual subscriptions. Additional filters billed as needed.
           </p>
         </div>
       </section>
@@ -407,7 +498,7 @@ export default function Home() {
         <div className="flex flex-row items-center justify-center gap-4">
           <a
             href="#contact"
-            className="text-sm font-semibold text-[#1e3a8a] transition-colors hover:text-[#0f2347] hover:underline"
+            className="text-sm font-semibold text-[#1e3a8a] hover:text-[#0f2347] hover:underline transition-colors"
             id="footer-call"
           >
             Questions? Call Us →
@@ -415,7 +506,7 @@ export default function Home() {
           <span className="text-gray-300">|</span>
           <a
             href="#chat"
-            className="text-sm font-semibold text-[#1e3a8a] transition-colors hover:text-[#0f2347] hover:underline"
+            className="text-sm font-semibold text-[#1e3a8a] hover:text-[#0f2347] hover:underline transition-colors"
             id="footer-chat"
           >
             Chat with Us →
@@ -426,21 +517,14 @@ export default function Home() {
   );
 }
 
-/* ── Reusable components ── */
+/* ── CheckItem component ── */
 function CheckItem({
   text,
-  white = false,
-  gold = false,
   highlight = false,
 }: {
   text: string;
-  white?: boolean;
-  gold?: boolean;
   highlight?: boolean;
 }) {
-  const color = gold ? "#e8a820" : white ? "rgba(255,255,255,0.9)" : "#2b9f4a";
-
-  // If highlight=true, render "FREE" in a distinct color
   const renderText = () => {
     if (!highlight) return <span>{text}</span>;
     const parts = text.split("FREE");
@@ -457,7 +541,7 @@ function CheckItem({
     <li className="flex items-start gap-3 text-sm font-medium text-gray-600 leading-snug">
       <svg
         viewBox="0 0 20 20"
-        fill={color}
+        fill="#2b9f4a"
         width="16"
         height="16"
         className="flex-shrink-0 mt-0.5"

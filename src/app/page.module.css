@@ -21,6 +21,18 @@
   box-shadow: 0 1px 8px rgba(15, 35, 71, 0.06);
 }
 
+/* Navbar variant: solid white (hero has white bg) */
+.navbarHero {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid #e8ecf2;
+  box-shadow: 0 1px 8px rgba(15, 35, 71, 0.06);
+}
+
 .navInner {
   max-width: 1180px;
   margin: 0 auto;
@@ -69,6 +81,30 @@
   color: #1a3a6b;
 }
 
+/* Nav links on transparent hero navbar */
+.navLinksHero {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  margin-left: auto;
+}
+
+.navLinksHero a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+  padding: 6px 14px;
+  border-radius: 6px !important;
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.navLinksHero a:hover {
+  background: #f0f4f8;
+  color: #1a3a6b;
+}
+
 .navActive {
   background: #2d8653 !important;
   color: white !important;
@@ -99,7 +135,213 @@
   border-radius: 2px !important;
 }
 
-/* Hero section styles removed (migrated to Tailwind) */
+/* Hamburger lines – dark since navbar is white */
+.navbarHero .hamburger span {
+  background: #1a3a6b;
+}
+
+/* =============================================
+   HERO SECTION – Split layout: white left, image right
+   ============================================= */
+.hero {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  /* Full viewport height on mobile, taller on desktop */
+  height: 100svh;
+  min-height: 480px;
+  max-height: 720px;
+  overflow: hidden;
+}
+
+/* Image container: right half only */
+.heroBg {
+  position: absolute;
+  /* Left half is white; image starts from ~40% on desktop */
+  left: 38%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.heroBgImg {
+  object-fit: cover;
+  /* Worker centered so face visible */
+  object-position: center top;
+}
+
+/* Gradient: fades image into white from left edge of image area */
+.heroGradientLeft {
+  position: absolute;
+  /* Covers the overlap zone where image meets white */
+  left: 28%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.85) 18%,
+    rgba(255, 255, 255, 0.4) 40%,
+    transparent 70%
+  );
+}
+
+/* Bottom: fade out to white */
+.heroGradientBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28%;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.7) 60%,
+    #ffffff 100%
+  );
+}
+
+/* Top: no tint needed since navbar is white */
+.heroGradientTop {
+  display: none;
+}
+
+/* Hero content: text on the left white area */
+.heroContent {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* Offset from top for the fixed navbar */
+  padding-top: 66px;
+  padding-left: 28px;
+  padding-right: 20px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.heroText {
+  /* Text sits on the pure white left side */
+  width: 42%;
+  max-width: 460px;
+  flex-shrink: 0;
+}
+
+.heroTitle {
+  font-size: clamp(1.9rem, 4.5vw, 3.5rem);
+  font-weight: 800;
+  color: #1e3a8a;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* =============================================
+   IMPACT CARD – Enhanced version
+   ============================================= */
+.impactCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(17, 24, 39, 0.08), 0 2px 8px rgba(17, 24, 39, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.impactCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #1e3a8a, #2d8653);
+}
+
+.impactHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.impactIconWrap {
+  width: 36px;
+  height: 36px;
+  background: #2d8653/10;
+  background-color: rgba(45, 134, 83, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.impactDot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #2d8653;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+/* Stat strip inside impact card */
+.impactStats {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-top: 20px;
+  background: linear-gradient(135deg, #f0f7ff 0%, #f0faf5 100%);
+  border: 1px solid #e2edf8;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.impactStat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 12px;
+  gap: 2px;
+}
+
+.impactStatNum {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1e3a8a;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.impactStatUnit {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2d8653;
+}
+
+.impactStatLabel {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #64748b;
+  text-align: center;
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+.impactStatDivider {
+  width: 1px;
+  background: #dde8f2;
+  margin: 12px 0;
+}
+
 
 /* =============================================
    PLANS GRID SECTION
@@ -550,7 +792,8 @@
 
 /* ── Smaller tablets / large phones (≤768px) ── */
 @media (max-width: 768px) {
-  .navLinks {
+  .navLinks,
+  .navLinksHero {
     display: none;
   }
   .hamburger {
@@ -558,6 +801,32 @@
   }
   .navInner {
     padding: 0 16px;
+  }
+
+  /* Hero: on mobile, image goes full width behind text */
+  .heroBg {
+    left: 0;
+  }
+  .heroGradientLeft {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(255, 255, 255, 0.88) 30%,
+      rgba(255, 255, 255, 0.5) 55%,
+      transparent 80%
+    );
+  }
+  .heroContent {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .heroText {
+    width: 65%;
+    max-width: 320px;
+  }
+  .heroTitle {
+    font-size: clamp(1.75rem, 8vw, 2.4rem);
   }
 
   /* Switch to 1 column for cards */
