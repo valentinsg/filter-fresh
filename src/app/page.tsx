@@ -23,13 +23,20 @@ export default function Home() {
         }`}
       >
         <div className="max-w-[1180px] mx-auto px-7 h-[66px] flex items-center gap-2">
-          {/* Logo */}
+          {/* Logo – swap between complete (transparent) and no-bg (scrolled) */}
           <div className="flex-shrink-0 mr-4 relative w-[150px] h-[48px]">
+            <Image
+              src="/logo-complete.png"
+              alt="FilterFresh Logo"
+              fill
+              className={`object-contain transition-opacity duration-300 ${scrolled ? "opacity-0" : "opacity-100"}`}
+              priority
+            />
             <Image
               src="/logo-without-bg.png"
               alt="FilterFresh Logo"
               fill
-              className="object-contain"
+              className={`object-contain transition-opacity duration-300 ${scrolled ? "opacity-100" : "opacity-0"}`}
               priority
             />
           </div>
@@ -124,14 +131,14 @@ export default function Home() {
       {/* ── HERO SECTION – fullscreen image, transparent navbar bleeds into it ── */}
       <section
         className="relative w-full overflow-hidden"
-        style={{ height: "70svh", minHeight: 500, maxHeight: 750 }}
+        style={{ height: "60svh", minHeight: 420, maxHeight: 620 }}
       >
         {/* Background image – full coverage */}
         <Image
           src="/worker-filter-fresh.jpeg"
           alt="FilterFresh technician holding air filter"
           fill
-          className="object-cover object-[10%_top] ml-20"
+          className="object-cover object-[20%_0%] ml-20"
           priority
           sizes="100vw"
         />
@@ -156,20 +163,25 @@ export default function Home() {
         />
 
         {/* Hero text + CTA inside hero */}
-        <div className="relative z-20 h-full flex items-center px-6 md:px-12 lg:px-20">
-          <div className="max-w-[420px] md:max-w-[480px]">
+        <div className="relative z-20 h-full flex items-end pb-24 md:pb-14 px-5 md:px-10 lg:px-16">
+          <div className="max-w-[260px] md:max-w-[420px]">
             <h1
-              className="font-medium text-[#1e3a8a] leading-[1.08] "
+              className="font-medium text-[#0f2347] leading-[1.08] "
               style={{ fontSize: "clamp(2rem, 5.5vw, 3.6rem)" }}
             >
-              Your Home&apos;s Air
+              Breathe Cleaner
               <br />
-              May Be 2–5x
-              <br />
-              More Polluted
-              <br />
-              Than Outside
+              Air at Home
             </h1>
+
+            <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
+              Your HVAC system circulates the air your <strong>family</strong>{" "}
+              breathes every day.
+            </p>
+            <p className="mt-3 text-base md:text-lg text-gray-700 leading-relaxed">
+              FilterFresh keeps it clean with scheduled filter replacement and
+              professional care.
+            </p>
 
             {/* CTA below headline */}
             <div className="mt-6 flex flex-col sm:flex-row items-start gap-3">
@@ -178,8 +190,8 @@ export default function Home() {
                 className="inline-flex items-center justify-center bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white px-6 py-3 rounded-md shadow-md transition-all font-semibold text-sm whitespace-nowrap"
                 id="btn-hero-protect"
               >
-                Protect My Air Now
-              </a>{" "}
+                Protect My Air
+              </a>
             </div>
           </div>
         </div>
@@ -197,32 +209,28 @@ export default function Home() {
                 Indoor Air Quality
               </p>
               <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1e3a8a] leading-tight">
-                Your Home&apos;s Air May Be 2–5x More Polluted Than Outside
+                Most Homes Are Breathing Toxic Air
               </h2>
               <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
-                Americans spend 90% of their time indoors. When your HVAC filter
-                is dirty, it doesn&apos;t just stop working. It recirculates
-                dust, pet dander, pollen, mold spores, and fine particles into
-                the air your family breathes every single day.
+                Americans spend nearly 90% of their time indoors. When HVAC
+                filters clog with dust, pollen, and pollutants, those particles{" "}
+                <strong>don&apos;t disappear</strong> — they circulate through
+                your home every time the system runs.
               </p>
               <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
-                If you have pets, allergies, asthma, or children, your filter is
-                not optional maintenance. It is your home&apos;s first line of
-                defense.
+                FilterFresh makes clean indoor air simple. We deliver and
+                replace your filters on schedule so your system runs efficiently
+                and the air you breathe stays fresh.
               </p>
 
               <div className="mt-8 md:mt-10">
                 <a
-                  href="#plans"
+                  href="#how-it-works"
                   className="inline-flex items-center justify-center w-full md:w-auto bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white px-7 py-3.5 rounded-md shadow-md transition-all font-semibold"
-                  id="btn-hero-protect"
+                  id="btn-see-how"
                 >
-                  See plan options
+                  See How It Works
                 </a>
-                <p className="mt-3 text-sm text-gray-500">
-                  Professional filter replacement. On schedule. Clean the air
-                  you breathe.
-                </p>
               </div>
             </div>
 
