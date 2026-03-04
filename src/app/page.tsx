@@ -16,11 +16,10 @@ export default function Home() {
     <div className="min-h-screen font-sans bg-white">
       {/* ── NAVBAR – transparent on hero, white on scroll ── */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white border-b border-gray-200 shadow-[0_1px_8px_rgba(15,35,71,0.07)]"
-            : "bg-transparent border-transparent shadow-none"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+          ? "bg-white border-b border-gray-200 shadow-[0_1px_8px_rgba(15,35,71,0.07)]"
+          : "bg-transparent border-transparent shadow-none"
+          }`}
       >
         <div className="max-w-[1180px] mx-auto px-7 h-[66px] flex items-center gap-2">
           {/* Logo */}
@@ -50,11 +49,10 @@ export default function Home() {
                 <a
                   href={link.href}
                   id={link.id}
-                  className={`text-sm font-semibold px-3.5 py-1.5 rounded-md transition-all duration-300 ${
-                    scrolled
-                      ? "text-gray-600 hover:bg-gray-100 hover:text-[#1e3a8a]"
-                      : "text-white/90 hover:bg-white/20 hover:text-white"
-                  }`}
+                  className={`text-sm font-semibold px-3.5 py-1.5 rounded-md transition-all duration-300 ${scrolled
+                    ? "text-gray-600 hover:bg-gray-100 hover:text-[#1e3a8a]"
+                    : "text-white/90 hover:bg-white/20 hover:text-white"
+                    }`}
                   style={
                     scrolled ? {} : { textShadow: "0 1px 4px rgba(0,0,0,0.35)" }
                   }
@@ -84,9 +82,8 @@ export default function Home() {
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className={`block w-[22px] h-[2px] rounded-sm transition-colors duration-300 ${
-                  scrolled ? "bg-[#1e3a8a]" : "bg-white shadow-sm"
-                }`}
+                className={`block w-[22px] h-[2px] rounded-sm transition-colors duration-300 ${scrolled ? "bg-[#1e3a8a]" : "bg-white shadow-sm"
+                  }`}
               />
             ))}
           </button>
@@ -162,14 +159,16 @@ export default function Home() {
               className="font-medium text-[#1e3a8a] leading-[1.08] "
               style={{ fontSize: "clamp(2rem, 5.5vw, 3.6rem)" }}
             >
-              Your Home&apos;s Air
+              Breathe Cleaner
               <br />
-              May Be 2–5x
-              <br />
-              More Polluted
-              <br />
-              Than Outside
+              Air at Home
             </h1>
+
+            <p className="mt-4 text-base md:text-lg text-gray-600 leading-relaxed">
+              Your HVAC system circulates the air you breathe every day.
+              <br />
+              FilterFresh keeps it clean with scheduled filter replacement and professional care.
+            </p>
 
             {/* CTA below headline */}
             <div className="mt-6 flex flex-col sm:flex-row items-start gap-3">
@@ -178,7 +177,7 @@ export default function Home() {
                 className="inline-flex items-center justify-center bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white px-6 py-3 rounded-md shadow-md transition-all font-semibold text-sm whitespace-nowrap"
                 id="btn-hero-protect"
               >
-                Protect My Air Now
+                Protect My Air
               </a>{" "}
             </div>
           </div>
@@ -197,32 +196,28 @@ export default function Home() {
                 Indoor Air Quality
               </p>
               <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1e3a8a] leading-tight">
-                Your Home&apos;s Air May Be 2–5x More Polluted Than Outside
+                Most Homes Are Breathing Dirty Air
               </h2>
               <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
-                Americans spend 90% of their time indoors. When your HVAC filter
-                is dirty, it doesn&apos;t just stop working. It recirculates
-                dust, pet dander, pollen, mold spores, and fine particles into
-                the air your family breathes every single day.
+                Americans spend nearly 90% of their time indoors. When HVAC
+                filters clog with dust, pollen, and pollutants, those particles
+                don&apos;t disappear — they circulate through your home every
+                time the system runs.
               </p>
               <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
-                If you have pets, allergies, asthma, or children, your filter is
-                not optional maintenance. It is your home&apos;s first line of
-                defense.
+                FilterFresh makes clean indoor air simple. We deliver and replace
+                your filters on schedule so your system runs efficiently and the
+                air you breathe stays fresh.
               </p>
 
               <div className="mt-8 md:mt-10">
                 <a
-                  href="#plans"
+                  href="#how-it-works"
                   className="inline-flex items-center justify-center w-full md:w-auto bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white px-7 py-3.5 rounded-md shadow-md transition-all font-semibold"
-                  id="btn-hero-protect"
+                  id="btn-see-how"
                 >
-                  See plan options
+                  See How It Works
                 </a>
-                <p className="mt-3 text-sm text-gray-500">
-                  Professional filter replacement. On schedule. Clean the air
-                  you breathe.
-                </p>
               </div>
             </div>
 
