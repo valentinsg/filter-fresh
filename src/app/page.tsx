@@ -167,24 +167,28 @@ export default function Home() {
           <div className="max-w-[260px] md:max-w-[420px]">
             <h1
               className="font-medium text-[#0f2347] leading-[1.08] "
-              style={{ fontSize: "clamp(2rem, 5.5vw, 3.6rem)" }}
+              style={{ fontSize: "clamp(1.6rem, 4.5vw, 2.8rem)" }}
             >
               Breathe Cleaner
               <br />
               Air at Home
             </h1>
 
-            <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
-              Your HVAC system circulates the air your <strong>family</strong>{" "}
-              breathes every day.
+            <p className="mt-4 text-sm md:text-base text-gray-600 leading-relaxed">
+              Your HVAC system circulates
+              <br />
+              the air your <strong>family</strong> breathes every day.
             </p>
-            <p className="mt-3 text-base md:text-lg text-gray-700 leading-relaxed">
-              FilterFresh keeps it clean with scheduled filter replacement and
-              professional care.
+            <p className="mt-3 text-sm md:text-base text-gray-600 leading-relaxed">
+              FilterFresh keeps it clean with
+              <br />
+              scheduled filter replacement
+              <br />
+              and professional care.
             </p>
 
             {/* CTA below headline */}
-            <div className="mt-6 flex flex-col sm:flex-row items-start gap-3">
+            <div className="mt-5 flex flex-col sm:flex-row items-start gap-3">
               <a
                 href="#plans"
                 className="inline-flex items-center justify-center bg-gradient-to-r from-[#1e4a7e] to-[#4c8bd1] hover:from-[#153a63] hover:to-[#3a75b8] text-white px-6 py-3 rounded-md shadow-md transition-all font-semibold text-sm whitespace-nowrap"
@@ -198,7 +202,7 @@ export default function Home() {
       </section>
       {/* ── IAQ CONTENT SECTION ── */}
       <section
-        className="w-full pt-16 pb-20 md:pt-20 md:pb-24 bg-white"
+        className="w-full pt-20 pb-20 md:pt-32 md:pb-24 bg-white"
         id="pricing"
       >
         <div className="max-w-7xl mx-auto px-5 md:px-12">
@@ -213,9 +217,9 @@ export default function Home() {
               </h2>
               <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
                 Americans spend nearly 90% of their time indoors. When HVAC
-                filters clog with dust, pollen, and pollutants, those particles{" "}
-                <strong>don&apos;t disappear</strong> — they circulate through
-                your home every time the system runs.
+                filters clog with dust, pollen, and pollutants, those particles
+                don&apos;t disappear — they circulate through your home every
+                time the system runs.
               </p>
               <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
                 FilterFresh makes clean indoor air simple. We deliver and
@@ -235,7 +239,7 @@ export default function Home() {
             </div>
 
             {/* Right: Impact card */}
-            <div className="md:col-span-5">
+            <div className="md:col-span-5 pt-20">
               <div className="relative bg-white border-transparent rounded-2xl overflow-hidden shadow-[0_8px_32px_rgba(17,24,39,0.08)]">
                 {/* Top faded image */}
                 <div className="relative w-full h-[200px] overflow-hidden">
