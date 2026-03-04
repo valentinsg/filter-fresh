@@ -212,7 +212,7 @@ export default function Home() {
               <p className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-wide text-[#2d8653] bg-[#2d8653]/10 px-3 py-1 rounded-full">
                 Indoor Air Quality
               </p>
-              <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1e3a8a] leading-tight">
+              <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold text-[#1e3a8a] leading-tight">
                 Most Homes Are Breathing Toxic Air
               </h2>
               <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
